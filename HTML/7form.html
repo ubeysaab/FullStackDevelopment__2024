@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="test.py" method="post" >
+    <input type="number" value="522" hidden>
+    <label for="user">Username </label>
+    <br>
+    <input type="text"  id="user"  name="user" required placeholder="please Enter your userName">
+    <hr>
+    
+
+
+    <label for="pas">password  </label>
+    <br>
+    <input type="password"  id="pas" name="pas" placeholder="Please Enter A strong password" minlength="8" maxlength="12">
+    <hr>
+
+    <label for="mob">Mobile </label>
+    <br>
+    <input type="tel"  id="mob" name="mob" placeholder="phone number" pattern="+([0-9]{3}) [0-9]{11}">
+
+    <hr>
+
+    <label for="em">Email</label>
+    <br>
+    <input type="email"  id="em" name="em" required placeholder="Enter your Email address">
+
+    <hr>
+
+
+    <label for="sub">Subject</label>
+    <br>
+    <input type="text"  id="sub" name="sub" placeholder=" please write the subject">
+    <hr>
+
+
+    <input  id="sub" type="submit" value="sendData ">
+    <br>
+    <br>
+
+    <input  id='res' type="reset" value="Empty Form">
+
+    <br>
+    <input type="range" name="ran" value="400" max="500" min="0" step="50" oninput="this.nextElementSibling.value=this.value">
+    <output> 400</output>
+    
+  </form>
+</body>
+</html>

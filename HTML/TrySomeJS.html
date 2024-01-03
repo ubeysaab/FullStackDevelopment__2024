@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <style>
+      /*Learn how to apply a background colour just on element not on the complete line */
+      .drink{/*the syntax for calss peride cahracter , followed by class name  the define the CSS properties within curly brackets*/
+        color: red;
+        
+        font-weight: bold;
+        font-family: italic;
+        
+        
+      }
+      #mydrinks{
+        background-color: aquamarine;
+        text-align: center;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <button onclick="myfun()"> hide element</button>
+  <body>
+    <a href="#mydrinks"> go to drinks list
+      buna bookmarks diyoruz
+    </a>
+    <blockquote>
+      the HTML class attribute is used to specify a class for an HTML element multiple html elements can share the same class
+      <h1>Using The calss Attribute :</h1>
+      is often used to point to a class  in name a style sheet It can also be used by a javaScript to access and manipulate elements with the specific class name
+   <h2> the HTML elements can belong to more than one class  just type class then separete the  class names with a space </h2>
+   <h3>different elements can share the same class </h3>
+    </blockquote>
+    <h3 id="mydrinks">  <button onclick="myIdfun()" style="float: right;"> change text </button> MyDrinks</h3> 
+    <dl>
+      <dt class="drink">Coffe</dt>
+      <dd>a black drink </dd>
+    </dl>
+    <h2>
+      A class name can be used by multiple HTML elements, while an id name must only be used by one HTML element within the page
+    </h2>
+    
+    <script>
+      function myfun(){
+        const x=document.getElementsByClassName('drink');
+        for(let i =0;i<x.length;i++){
+          x[i].style.display="none";
+          
+        }
+       
+      }
+    </script>
+    <script>
+       function myIdfun(){
+          document.getElementById("mydrinks").innerHTML="What do you wanna drink ser ??";
+        }
+    </script>
+  </body>
+</html>
