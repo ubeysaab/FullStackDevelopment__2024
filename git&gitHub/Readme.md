@@ -11,7 +11,10 @@ when we call diff command we get only the lines they are different between two f
 
 - in this example 5c5,6 mean 5th line in the first file replaced by 5,6 in the second file (c mean change )
 
-- 11a13-15 the differences is not obvious here so we can use diff -u
+- 11a13-15 the differences is not obvious here so we can use 
+````git 
+diff -u
+```
 ![Alt text](image-2.png)
 <!-- wdiff highlights words that changed inside the file
  , meld , Kdiff3  highlighted differences using colors  -->
@@ -32,7 +35,7 @@ diff -u oldFile new file > changes.diff
 
 now we have the diff file and we want to apply it to our script so we use patch command
 
- <!-- we use less than sympol to redirect the contents fo the file to standart input -->
+ <!-- we use less than sympol to redirect the contents fo the file to standart input -->``
 
 ```shell
 patch nameOfTheFileWeWannaPatchIn  <  changes.diff
@@ -149,3 +152,67 @@ Tracked: A file’s changes are recorded
 Untracked: A file’s changes are not recorded
 
 Version control systems (VCS): A tool to safely test code before releasing it, allow multiple people collaborate on the same coding projects together, and stores the history of that code and configuration
+
+
+<!-- Module 2 -->
+
+### Skipping the Stagin Area 
+
+```git 
+git commit -a 
+
+# a shortcut to stage any changes to tracked files and commit them in one step(if modified file has been never committed to the repo , we'll still need  to use git add to tracked first  )
+```
+when we use -a shortcut we skip the stagin area  meaning , we can't  add any other changes before creating the commit  
+
+
+**What is HEAD and where is it heading?** 
+Git uses the HEAD alias to represent the currently checked-out snapshot of your project.this let us know what the contents of our working directory should be.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+Check out the following links for more information:
+
+https://git-scm.com/doc
+
+https://www.mercurial-scm.org/
+
+https://subversion.apache.org/
+
+https://en.wikipedia.org/wiki/Version_control
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -->
