@@ -1,5 +1,18 @@
-## 1.Version Control
+- [Version Control](#1version-control)
+  - [Finding the differences](#finding-the-differences)
+  - [Generating Diff files](#generating-diff-files)
+  - [Applying changes](#applying-changes)
+  - [First steps with git](#first-steps-with-git)
+  - [Life cycle of each track file](#life-cycle-of-each-track-file) 
+  -[Terms and definitions](#terms-and-definitions)
+    <br>
+- [Advance Git interaction](#advance-git-interaction) 
+- [Skipping the stagin area](#skipping-the-stagin-area) 
+- [Getting more information about our changes](#getting-more-informations-about-our-changes) 
+- [Deleting and Renaming Files]()
 
+## 1.Version Control
+ 
 ### finding the differences
 
 dif take two directroy ar two files and show the differences between them in a few formates
@@ -11,11 +24,14 @@ when we call diff command we get only the lines they are different between two f
 
 - in this example 5c5,6 mean 5th line in the first file replaced by 5,6 in the second file (c mean change )
 
-- 11a13-15 the differences is not obvious here so we can use 
-````git 
+- 11a13-15 the differences is not obvious here so we can use
+
+```git
 diff -u
 ```
+
 ![Alt text](image-2.png)
+
 <!-- wdiff highlights words that changed inside the file
  , meld , Kdiff3  highlighted differences using colors  -->
 
@@ -51,7 +67,7 @@ we have seen up till now how we can use existing tools to extract differences be
 
 ---
 
-## First Steps with Git
+### First Steps with Git
 
 we said earlier that VCS track who and when the changes are made for this to work we need to till git who we are to do this we need to use 'git config and setting the values of user email and user name
 
@@ -117,7 +133,7 @@ Git project will consist of three sections :
 
 ---
 
-## Terms and definitions
+### Terms and definitions
 
 Commit: A command to make edits to multiple files and treat that collection of edits as a single change
 
@@ -153,45 +169,93 @@ Untracked: A file’s changes are not recorded
 
 Version control systems (VCS): A tool to safely test code before releasing it, allow multiple people collaborate on the same coding projects together, and stores the history of that code and configuration
 
-
 <!-- Module 2 -->
 
-### Skipping the Stagin Area 
+## 2.Advance git interaction
 
-```git 
-git commit -a 
+### Skipping the Stagin Area
+
+```git
+git commit -a
 
 # a shortcut to stage any changes to tracked files and commit them in one step(if modified file has been never committed to the repo , we'll still need  to use git add to tracked first  )
 ```
-when we use -a shortcut we skip the stagin area  meaning , we can't  add any other changes before creating the commit  
 
+when we use -a shortcut we skip the stagin area meaning , we can't add any other changes before creating the commit
 
-**What is HEAD and where is it heading?** 
+**What is HEAD and where is it heading?**
 Git uses the HEAD alias to represent the currently checked-out snapshot of your project.this let us know what the contents of our working directory should be.
 
+<!-- we'll see head use when we learn how  to undo things and perform  rollbacks. -->
+
+### Getting More Informations About Our Changes
+
+we have seen how git log show us the list of commits made in the current Git repository. By default is , it prints the commit message, the author, and the date of the change. This is useful, but if we're combing through a history of changes in a repo to try and find what caused the latest outage, we'll probably also need _to look at the actual lines that changed in each commit_. To do this with git log, we can use the -p flag.
+
+```git
+git log -p
+# p comes from patch cause -p will give the patch that has been created
+```
+
+another option if we don't wanna scroll down until find the commit that we're actually interested in
+
+```git
+git show  CommitIdAsParameter
+```
+
+another interested flag
+
+```git
+git log --stat
+# this will caus git log to show some stats about the changes in the commit like which files were changed and how many lines added or removed
+```
+
+now what about changes that haven't been committed yet?
+
+<!-- unstaged changes -->
+
+```git
+git diff
+# if our change was bigger and included several files , we could  pass a file by parameter to see the differences relevant to that specific file instead of all files at the same time.
 
 
+# git diff by default shows unstaged changes  but if we wanna see the differences that staged but not commited we can use
 
+git diff --staged
+```
 
+Something else we can do to review changes before adding them is to use
 
+```git
+git add -p
+#when we use this flag Git will show us the change being added and ask if we want to stage it or not this way we can detect if there's any changes that  we con't want to commit
+```
 
+### Deleting and Renaming Files
 
+we can remove files from ours repository with the `git rm ` which will stop the file from being tracked by git and remove it from the git directory. File removals go through the same general workflow that we've seen. So we'll need to write a commit message as to why we've deleted them.
 
+and we can ust `git mv` to rename files in the repository after rename a file and run `git status` The status shows us that the file was renamed and clearly displays the old and new names. As with the previous example, the change is staged, but not committed.
 
+If there are files that get automatically generated by our scripts, or our operating system generates artifacts that we don't want in our repo, we'll want to ignore them so that they don't add noise to the output of git status. To do this, we can use the gitignore file.
+Play video starting at :3:3 and follow transcript3:03
+Inside this file, we'll specify rules to tell git which files to skip for the current repo. For example, if we're working on an OSX computer, we'll probably want to ignore the dot DS_store file, which is automatically generated by the operating system. To do this, we'll create a .gitignore file containing the name of this file.
+his file needs to get tracked just like the rest of the files in the repo.
 
+> Remember that the dot prefix in a Unix-like file system indicates that the file or directory is hidden and won't show up when you do the normal directory listing.
 
+### Undoing Changes Before Commiting
 
+Being able to revert our changes is one of the most powerful features offered by version control systems. There's a bunch of different techniques available depending on which changes we need to undo.
 
+- **Undoing Unstaged Changes**
+  `git checkout fileNameWeWannaRevert` git checkout restores files to the latest stored snapshot(which can be either commited or staged), reverting any changes before staging.
 
+So if we've made additional changes to a file after we've staged it, we can restore the file to the earlier stage version and by using _-p_ flag we can check out individual changes instead of the whole file This will ask us change by change if we want to go back to the previous snapshot or not.
 
+<!-- think of it like you're checkingout the original file from the latest storage snapshot -->
 
-
-
-
-
-
-
-<!-- 
+<!--
 
 Check out the following links for more information:
 
