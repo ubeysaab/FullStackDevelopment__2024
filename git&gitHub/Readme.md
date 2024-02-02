@@ -397,7 +397,11 @@ to see what the commit history look like know
 
 
 
+---
+<!-- 
+[remote branches ](https://www.freecodecamp.org/news/remote-branches-in-git/#:~:text=A%20remote%20branch%20exists%20in,remote%3E%20syntax.)
 
+  -->
 
 
 
@@ -413,6 +417,20 @@ If we want to get even more information about our remote, we can call `git remot
  what are the remote branches ? Whenever we're operating with remotes, Git uses remote branches to keep copies of the data that's stored in the remote repository.
 We could have a look at the remote branches that our Git repo is currently tracking by running `git branch -r`.These branches are read only. We can look at the commit history, like we would with local branches, but we can't make any changes to them directly.
 
+
+### Fetching New Changes 
+
+we can check if  any changes made to the remote repo  by running `git remote show origin` and git will tell us that `   main pushes to main (local out of date)`  this happen when there were commits  done to the repo and this commits doesn't reflected locally. 
+
+> Git doesn't keep remote and lcoal branches in sync automatically it waits until we execute commnands to move data around  when we're ready  
+
+to sync the data we use `git fetch`  this command copies the commits done in the remote repository to the local repo so it lets us see how the central history has progressed usign `git log origin/master`,
+  
+![alt text](image-13.png)
+  
+ and  it doesn’t force us to actually merge the changes into our repository.
+
+ Git isolates fetched content from existing local content; it has absolutely no effect on our local development work. _Fetched content has to be explicitly checked out_ using the `git checkout` command. This makes fetching a safe way to review commits before integrating them with your local repository.
 
 
 
