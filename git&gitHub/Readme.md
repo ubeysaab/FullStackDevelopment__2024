@@ -59,7 +59,7 @@ diff -u oldFile new file > changes.diff
 
 now we have the diff file and we want to apply it to our script so we use patch command
 
- <!-- we use less than sympol to redirect the contents fo the file to standart input -->``
+ <!-- we use less than symbol to redirect the contents of the file to standard input -->``
 
 ```shell
 patch nameOfTheFileWeWannaPatchIn  <  changes.diff
@@ -77,7 +77,7 @@ we have seen up till now how we can use existing tools to extract differences be
 
 ### First Steps with Git
 
-we said earlier that VCS track who and when the changes are made for this to work we need to till git who we are to do this we need to use 'git config and setting the values of user email and user name
+we said earlier that VCS tracks who and when the changes are made for this to work we need to till git who we are to do this we need to use 'git config and setting the values of user email and user name
 
 ```git
 git config -l // to check out our current configurations
@@ -88,12 +88,12 @@ git config --global user.name "MyName"
 git config --list
 ```
 
-we used the --global flag to state that we want set this value for all git repositories that we would use.
+we used the --global flag to state that we want to set this value for all git repositories that we would use.
 
-when that done there is two way to start git repositories
+when that is done there are two ways to start git repositories
 
 1. git init: to create one from scratch
-2. git clone: make copy of repository that already exist some where else
+2. git clone: make copy of repository that already exist somewhere else
 
 ```git
 git init
@@ -103,9 +103,11 @@ git init
 when we run git init we initialize empty git repository in the current directory
 
 which create .git directory which contains:
+  
 ![Alt text](image-6.png)
-we can think of it as data base for our get project that store the changes and the change history we saw that .git contains bunch of different files and directories we don't touch any of these files directly we always interact with them throgh git commands
-so when ever we clone a repo this git directory is copied for our computer and when ever we run git init to create a new repo a new git directory is initialize
+  
+we can think of it as a database for our get project that stores the changes and the change history we saw that .git contains bunch of different files and directories we don't touch any of these files directly we always interact with them throgh git commands
+so when ever we clone a repo this git directory is copied for our computer and when ever we run git init to create a new repo a new git directory is initialized
 
 ![Alt text](image-7.png)
 
