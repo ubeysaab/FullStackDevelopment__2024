@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- TODO : ! NEW META TAG  -->
+  <meta name="view-transition" content="same-origin"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+
+  <nav>
+    <ul class="nav__list">
+      <li class="active">
+        <a href="index.html" aria-current="page">Home</a>
+      </li>
+      <li>
+        <a href="about.html">about</a>
+      </li>
+      <li>
+        <a href="blog.html">blog</a>
+      </li>
+      <li>
+        <a href="#">another</a>
+      </li>
+      <li>
+        <a href="#">antoerh</a>
+      </li>
+    </ul>
+  </nav>
+<main>
+
+  <h1>Home</h1>
+</main>
+<script>
+  let allListElements = document.querySelectorAll(".nav__list li>a")
+  console.log(allListElements)
+
+
+  allListElements.forEach((item,i)=>{return (item.style.viewTransitionName=`link${i}`)})
+allListElements.forEach(item=>console.log(item.style))
+
+// after giving a specific transition for each element we can see beautiful sliding without cross fade effect 
+</script>
+</body>
+
+</html>

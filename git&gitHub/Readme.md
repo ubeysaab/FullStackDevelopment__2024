@@ -3,21 +3,29 @@
   - [Generating Diff files](#generating-diff-files)
   - [Applying changes](#applying-changes)
   - [First steps with git](#first-steps-with-git)
-  - [Life cycle of each track file](#life-cycle-of-each-track-file) -[Terms and definitions](#terms-and-definitions)
+  - [Life cycle of each track file](#life-cycle-of-each-track-file)
     <br>
 - [Advance Git interaction](#advance-git-interaction)
+
   - [Skipping the stagin area](#skipping-the-stagin-area)
   - [Getting more information about our changes](#getting-more-informations-about-our-changes)
   - [Deleting and Renaming Files](#deleting-and-renaming-files)
   - [Undoing Changes Before Commiting](#undoing-changes-before-commiting)
   - [Amending Commits](#amending-commits)
   - [RollBack](#rollbacks)
-<br>
+    <br>
 
 - [Branching and Merging](#branching-and-merging)
+  - [Working with Branches](#working-with-branches)
+  - [Merging](#merging)
+  - [Merging Conflicts](#merge-conflicts)
+    <br/>
 - [Working With Remotes](#working-with-remotes)
 
+  - [Fetching New Changes](#fetching-new-changes)
+  - [Updating the Local Repository](#updating-the-local-repository)
 
+- [Terms and definitions](#terms-and-definitions)
 
 ## 1.Version Control
 
@@ -34,7 +42,7 @@ when we call diff command we get only the lines they are different between two f
 
 - 11a13-15 the differences is not obvious here so we can use
 
-```git
+```bash
 diff -u
 ```
 
@@ -103,9 +111,9 @@ git init
 when we run git init we initialize empty git repository in the current directory
 
 which create .git directory which contains:
-  
+
 ![Alt text](image-6.png)
-  
+
 we can think of it as a database for our get project that stores the changes and the change history we saw that .git contains bunch of different files and directories we don't touch any of these files directly we always interact with them throgh git commands
 so when ever we clone a repo this git directory is copied for our computer and when ever we run git init to create a new repo a new git directory is initialized
 
@@ -145,63 +153,6 @@ Git project will consist of three sections :
 ![Alt text](image-9.png)
 
 ---
-
-### Terms and definitions
-
-Commit: A command to make edits to multiple files and treat that collection of edits as a single change
-
-Commit files: A stage where the changes made to files are safely stored in a snapshot in the Git directory
-
-Commit message: A summary and description with contextual information on the parts of the code or configuration of the commit change
-
-Diff: A command to find the differences between two files
-
-DNS zone file: A configuration file that specifies the mappings between IP addresses and host names in your network
-
-Git: A free open source version control system available for installation on Unix based platforms, Windows and macOS
-
-Git directory: A database for a Git project that stores the changes and the change history
-
-Git log: A log that displays commit messages
-
-Git staging area: A file maintained by Git that contains all the information about what files and changes are going to go into the next commit
-
-Modified files: A stage where changes have been made to a file, but the have not been stored or committed
-
-Patch: A command that can detect that there were changes made to the file and will do its best to apply the changes
-
-Repository: An organization system of files that contain separate software projects
-
-Source Control Management (SCM): A tool similar to VCS to store source code
-
-Stage files: A stage where the changes to files are ready to be committed
-
-Tracked: A file’s changes are recorded
-
-Untracked: A file’s changes are not recorded
-
-Version control systems (VCS): A tool to safely test code before releasing it, allow multiple people collaborate on the same coding projects together, and stores the history of that code and configuration
-
-
-
-
-
-
-Branch: A pointer to a particular commit, representing an independent line of development in a project
-
-Commit ID: An identifier next to the word commit in the log
-
-Fast-forward merge: A merge when all the commits in the checked out branch are also in the branch that's being merged
-
-Head: This points to the top of the branch that is being used
-
-Master: The default branch that Git creates for when a new repository initialized, commonly used to place the approved pieces of a project
-
-Merge conflict: This occurs when the changes are made on the same part of the same file, and Git won't know how to merge those changes
-
-Rollback: The act of reverting changes made to software to a previous state 
-
-Three-way merge: A merge when the snapshots at the two branch tips with the most recent common ancestor, the commit before the divergence
 
 <!-- Module 2 -->
 
@@ -271,7 +222,8 @@ git add -p
 
 we can remove files from ours repository with the `git rm ` which will stop the file from being tracked by git and remove it from the git directory. File removals go through the same general workflow that we've seen. So we'll need to write a commit message as to why we've deleted them.
 
-and we can ust `git mv` to rename files in the repository after rename a file and run `git status` The status shows us that the file was renamed and clearly displays the old and new names. As with the previous example, the change is staged, but not committed.
+and we can ust `git mv` to rename files in the repository after rename a file and run `git status` The status shows us that the file was renamed and clearly displays the old and new names.
+**As with the previous example, the change is staged, but not committed.**
 
 If there are files that get automatically generated by our scripts, or our operating system generates artifacts that we don't want in our repo, we'll want to ignore them so that they don't add noise to the output of git status. To do this, we can use the gitignore file.
 `bash echo .fileName > .gitignore ` we'll specify rules to tell git which files to skip for the current repo. For example, if we're working on an OSX computer, we'll probably want to ignore the dot DS_store file, which is automatically generated by the operating system. To do this, we'll create a .gitignore file containing the name of this file.
@@ -284,7 +236,7 @@ his file needs to get tracked just like the rest of the files in the repo.
 Being able to revert our changes is one of the most powerful features offered by version control systems. There's a bunch of different techniques available depending on which changes we need to undo.
 
 - **Undoing Unstaged Changes**
-  `git checkout fileNameWeWannaRevert` git checkout restores files to the latest stored snapshot(which can be either commited or staged), reverting any changes before staging.
+  `git checkout fileNameWeWannaRevert` git checkout restores files to the latest stored snapshot(which can be either **_commited or staged_**), reverting any changes before staging.
   (discard new hunks from the workTree)
 
 <!-- think of it like you're checkingout the original file from the latest storage snapshot -->
@@ -300,7 +252,7 @@ So if we've made additional changes to a file after we've staged it, we can rest
 
 ### Amending Commits
 
-Let's say you just finished committing your latest batch of work, but you've forgotten to add a file that belongs to the same change. You'll want to update the commit to include that change. Or maybe the files were correct, but you realize that your commit message just wasn't descriptive enough. So you want to fix the description to add a link to the bug that you're solving with that commit. What can you do? We can solve problems like these using the `git commit --amend` option which will take whatever is currently in our staging area and run `git commit` workflow to _overWrite_ the previous commit
+Let's say you just finished committing your latest batch of work, but you've forgotten to add a file that belongs to the same change. You'll want to update the commit to include that change. Or maybe the files were correct, but you realize that your commit message just wasn't descriptive enough. So you want to fix the description to add a link to the bug that you're solving with that commit. What can you do? We can solve problems like these using the `git commit --amend` _option which will take whatever is currently in our staging area and run `git commit` workflow to **overWrite** the previous commit_
 
 Important Heads Up :
 
@@ -317,151 +269,189 @@ there are few ways to rollback commits in Git
    > in another words git revert will create a new commit, that is the opposite of every thing in the given commit
 
 #### Identifiying a Commit
- We can target a specific commit by using its commit ID. We've seen commit IDs a few times already. They show up when we're running the git log command.
- Commit IDs : are those complicated looking strings that appear after the word commit in the log messages
- The commit ID is the 40 character long string after the word commit, you really can't miss it. This long jumble of letters and numbers is actually something called a hash, which is calculated using an algorithm called SHA1.
- Essentially, what this algorithm does is take a bunch of data as input and produce a 40 character string from the data as the output. In the case of Git, the input is all information related to the commit, and the 40 character string is the commit ID.
+
+We can target a specific commit by using its commit ID. We've seen commit IDs a few times already. They show up when we're running the git log command.
+Commit IDs : are those complicated looking strings that appear after the word commit in the log messages
+The commit ID is the 40 character long string after the word commit, you really can't miss it. This long jumble of letters and numbers is actually something called a hash, which is calculated using an algorithm called SHA1.
+Essentially, what this algorithm does is take a bunch of data as input and produce a 40 character string from the data as the output. In the case of Git, the input is all information related to the commit, and the 40 character string is the commit ID.
+
  <!-- why on earth would you use a long jumble of letters as an ID for commit, instead of incrementing an integer, like 123, etc? To answer that, let's take a quick look at the reason why Git uses a hash instead of a counter, and how that hash is computed. Although SHA1 is a part of the class of cryptographic hash functions, Git doesn't really use these hashes for security.
 Play video starting at :1:55 and follow transcript1:55
 Instead, they're used to guarantee the consistency of our repository. -->
 
-
 ## Branching And Merging
 
- what is a branch? What is it used for? In Git, a branch at the most basic level is just a pointer to a particular commit. But more importantly, it represents an independent line of development in a project. Of which the commit it points to is the latest link in a chain of developing history. 
+what is a branch? What is it used for? In Git, a branch at the most basic level is just a pointer to a particular commit. But more importantly, it represents an independent line of development in a project. Of which the commit it points to is the latest link in a chain of developing history.
+
  <!--  TODO ADD IMAGE HERE -->
- The default branch that Git creates for you when a new repository initialized is called master.All of our examples and development have taken place on this branch so far. The master branch is commonly used to represent the known good state of a project. When you want to develop a feature or try something new in your project, you can create a separate branch to do your work without worrying about messing up this current working state.
+
+The default branch that Git creates for you when a new repository initialized is called master.All of our examples and development have taken place on this branch so far. The master branch is commonly used to represent the known good state of a project. When you want to develop a feature or try something new in your project, you can create a separate branch to do your work without worrying about messing up this current working state.
 _Branches make it really easy to experiment with new ideas or strategies and projects. When you want to add a feature or fix something, you can create a new branch and do your development there. then You can merge back into the master branch, when you've got something you like, or discard your changes without negative impact if they don't work out._
 
 ### Working with Branches
 
-As branches are essential to how work is done int git, there's tons of different ways to work with them we can use `git branch` command to  to list, create, delete, and manipulate branches 
+As branches are essential to how work is done int git, there's tons of different ways to work with them we can use `git branch` command to to list, create, delete, and manipulate branches
 
-```git 
-git branch # by it self will show you a list of all the branches in your  repo 
+- to show all branches we run `git branch` itself.
 
+ <br/>
 
-# to create a new branch we call 
-git branch TheNameOfTheNewBranch
-#OUR NEW BRANCH WAS CREATE BASED ON THE VALUE OF HEAD
+- for create a new branch we call `git branch TheNameOfTheNewBranch` and our new Created branch will **_Created Based On The Value Of Head_**
 
+ <br/>
 
-# switch to the new branch 
-git checkout  newBranchName
+- for switch to the new branch we can call either `git switch newBranchName` or `git checkout  newBranchName`
 
-# when we switch to a different branch using checkout under the hood git change where head is pointing (head went from pointing the latest commit in  the newFeature branch to the most recent commit of the master )
+  - when we switch to a different branch using checkout under the hood git change where head is pointing (HEAD went from pointing the latest commit in the newFeature branch to the most recent commit of the master and vice versa )
+  <!--  We saw earlier how we can use git checkout to restore a modified file back to the latest commit Checking out branches, is similar in that, the working tree is updated to match the selected branch including both the files and the git history.
+  this demonstrate that when we switch branches in git, the working directory and commit history will be changed to reflect the snapshot of our project -->
 
-# We saw earlier how we can use git checkout to restore a modified file back to the latest commit Checking out branches is similar in that the working tree is updated to match the selected branch including both the files and the git history.this demonstrate that when we switch branches in git, the working directory and commit history will be changed to reflect the snapshot of our project
+    <br/>
 
-# create branch and switch to it in a single command
-git checkout -b theNewBranchName
+  - > we should use `git commit` in each branch before switching so our changes doesn't get lost between branches
 
-# DELETE BRANCH
-git branch -d nameOfbranchWannaDelete
-#If there are changes in the branch we want to delete that haven't been merged back into the master branch, git will let us know with an error. it we stil wanna delete it 
-git branch-D branchName
-```
->  One thing to note after all this back and forth, is that each branch is just a pointer to a specific commit in a series of snapshots. It's very easy to create new branches because there isn't any data that needs to be copied around. When we switch to another branch, we check out a different commit and git updates both head and the contents of our working directory.
+- for create a new branch and switch to it in a single command we run `git checkout -b theNewBranchName`.
+
+ <br/>
+
+- to delete branch we run `git branch -d nameOfbranchWannaDelete` If there are changes in the branch we want to delete that haven't been merged back into the master branch, git will let us know with an error. it we stil wanna delete it `git branch-D branchName`
+
+> One thing to note after all this back and forth, is that each branch is just a pointer to a specific commit in a series of snapshots. It's very easy to create new branches because there isn't any data that needs to be copied around. When we switch to another branch, we check out a different commit and git updates both head and the contents of our working directory.
 
 <!-- ![Alt text](image-10.png) -->
 
-
-
-### Merging 
+### Merging
 
 A typical workflow for managing branches in Git, is to create a separate branch for developing any new features or changes. Once the new feature's in good shape, we merge `git merge ` the separate branch back into the main trunk of code. Merging is the term that Git uses for combining branch data and history together. We'll use the git merge command, which lets us take the independent snapshots and history of one Git branch, and tangle them into another.
 
-Git uses two different algorithms to perform a merge, fast-forward and three-way merge. The merge we just performed is an example of a fast-forward merge. This kind of merge occurs when _all the commits in the checked out branch_ _are also in the branch that's being merged_. If this is the case, we can say that the commit history of both branches doesn't diverge. In these cases, all Git has to do is update the pointers of the branches to the same commit, and no actual merging needs to take place.
+Git uses two different algorithms to perform a merge, _fast-forward_ and _three-way merge_. The merge we just performed is an example of a fast-forward merge. This kind of merge occurs when **all the commits in the checked out branch are also in the branch that's being merged**. If this is the case, we can say that the commit history of both branches doesn't diverge. In these cases, all Git has to do is update the pointers of the branches to the same commit, and no actual merging needs to take place.
+
 <!-- <video src="./fastForward.mp4" controls  autoplay title="Title"></video> -->
+
 ![Alt text](image-11.png)
 
+> As long as there are no conflicts, Git will move the current branch tip up to the target branch tip and combine histories of both commits.
 
- On the other hand, a three-way merge is performed when the history of the merging branches has diverged in some way, and there isn't a nice linear path to combine them via fast-forwarding. This happens _when a commit is made on one branch after the point when both branches split_.
+On the other hand, a three-way merge is performed when the history of the merging branches has diverged in some way, and there isn't a nice linear path to combine them via fast-forwarding. This happens _when a commit is made on one branch after the point when both branches split_.
 
 ![Alt text](image-12.png)
+
 <!-- In our case, this could have happened if we made a commit on the master branch after creating the other branches. -->
 
-When this occurs, Git will tie the branch histories together with a new commit. And merge the snapshots at the two branch tips with the most recent common ancestor, the commit before the divergence. To do this successfully, Git tries to figure out how to combine both snapshots. If the changes were made in different files, or in different parts of the same file, Git will take both changes and put them together in the result. If instead the changes are made on the same part of the same file, Git won't know how to merge those changes, and the attempt will result in a merge conflict
+_When this occurs, Git will tie the branch histories together with a new commit_. And merge the snapshots at the two branch tips with the most recent common ancestor, the commit before the divergence. To do this successfully, Git tries to figure out how to combine both snapshots. If the changes were made in different files, or in different parts of the same file, Git will take both changes and put them together in the result. If instead the changes are made on the same part of the same file, Git won't know how to merge those changes, and the attempt will result in a merge conflict
 
 ### Merge Conflicts
 
 From time to time, we might find that both the branches we're trying to merge have edits to the same part of the same file.
 This will result in something called a merge conflict.
 
-
-if we have a conflict git will throw a conflict error in case of overlap which is prevents loss of work if two lines overlap in this case we should _fix the conflicts_ or abort the merge using `git merge --abort` and we need to run `git add`  on each unmerged file to mark  that the conflits has been resolved 
-when we have conflict git will add some information  to our files to tell use which parts of the code are conflicting. so it's up to us to decide which one to keep or if we should change the contents of the file altogether 
+if we have a conflict git will throw a conflict error in case of overlap which is prevents loss of work if two lines overlap in this case we should _fix the conflicts_ or abort the merge using `git merge --abort` and we need to run `git add` on each unmerged file to mark that the conflits has been resolved
+when we have conflict git will add some information to our files to tell use which parts of the code are conflicting. so it's up to us to decide which one to keep or if we should change the contents of the file altogether
 after fix the conflict we will mark it as resolved by runnig `git add` on file and the call `git status` to see how our merge is doing if all conflict are resolved we need to run `git commit` to wrap up the merge
 
-to see what the commit history look like know 
-`git log --graph --oneline` to show us the log as graph and one line for a commit 
-
-
-
+to see what the commit history look like know
+`git log --graph --oneline` to show us the log as graph and one line for a commit
 
 ---
-<!-- 
+
+<!--
 [remote branches ](https://www.freecodecamp.org/news/remote-branches-in-git/#:~:text=A%20remote%20branch%20exists%20in,remote%3E%20syntax.)
 
   -->
 
-
-
 ## Working with Remotes
+
 When we call a git clone to get a local copy of a remote repository, Git sets up that remote repository with the default origin name.
- We can look at the configuration for that remote by running `git remote -v` in the directory of the repo.
+We can look at the configuration for that remote by running `git remote -v` in the directory of the repo.
 
 _Remote repositories have a name assigned to them, by default, the assigned name is origin_.
 
 If we want to get even more information about our remote, we can call `git remote show origin`
 
-
- what are the remote branches ? Whenever we're operating with remotes, Git uses remote branches to keep copies of the data that's stored in the remote repository.
+what are the remote branches ? Whenever we're operating with remotes, Git uses remote branches to keep copies of the data that's stored in the remote repository.
 We could have a look at the remote branches that our Git repo is currently tracking by running `git branch -r`.These branches are read only. We can look at the commit history, like we would with local branches, but we can't make any changes to them directly.
 
+### Fetching New Changes
 
-### Fetching New Changes 
+we can check if any changes made to the remote repo by running `git remote show origin` and git will tell us that `   main pushes to main (local out of date)` this happen when there were commits done to the repo and this commits doesn't reflected locally.
 
-we can check if  any changes made to the remote repo  by running `git remote show origin` and git will tell us that `   main pushes to main (local out of date)`  this happen when there were commits  done to the repo and this commits doesn't reflected locally. 
+> Git doesn't keep remote and local branches in sync automatically it waits until we execute commnands to move data around when we're ready
 
-> Git doesn't keep remote and lcoal branches in sync automatically it waits until we execute commnands to move data around  when we're ready  
+to sync the data we use `git fetch` this command copies the commits done in the remote repository to the local repo so it lets us see how the central history has progressed usign `git log origin/master`,
 
-to sync the data we use `git fetch`  this command copies the commits done in the remote repository to the local repo so it lets us see how the central history has progressed usign `git log origin/master`,
-  
+<!--
+
+# show commit logs of changes
+git log master..origin/master
+
+# show diffs of changes
+git diff master..origin/master -->
+
 ![alt text](image-13.png)
-  
- and  it doesn’t force us to actually merge the changes into our repository.
 
- Git isolates fetched content from existing local content; it has absolutely no effect on our local development work. _Fetched content has to be explicitly checked out_ using the `git checkout` command. This makes fetching a safe way to review commits before integrating them with your local repository.
+and it doesn’t force us to actually merge the changes into our repository.
 
+Git isolates fetched content from existing local content; it has absolutely no effect on our local development work. _Fetched content has to be explicitly checked out_ using the `git checkout` command. This makes fetching a safe way to review commits before integrating them with your local repository.
 
+### Updating the Local Repository
 
+Earlier, we took a look at the basic workflow for working with remotes when we want to fetch the changes manually, merge if necessary, and only then push any changes of our own. Since fetching and merging are so common, Git gives us the git pull command that does both for us. _Running git pull will fetch the remote copy of the current branch and automatically try to merge_ it into the current local branch.
 
+if we have a new Remote branch which we don't have a local branch for yet. To create a local branch for it, we can run `git checkout theNewBranchName` When we checked out the newBranch, Git automatically copied the contents of the remote branch into the local branch
 
+If we want to _get the contents of remote branches **without** automatically merging any contents into the local branches_, we can call `git remote update`. This will fetch the contents of all remote branches, so that we can just call checkout or merge as needed.
 
+## Terms and definitions
 
+Commit: A command to make edits to multiple files and treat that collection of edits as a single change
 
+Commit files: A stage where the changes made to files are safely stored in a snapshot in the Git directory
 
+Commit message: A summary and description with contextual information on the parts of the code or configuration of the commit change
 
+Diff: A command to find the differences between two files
 
+DNS zone file: A configuration file that specifies the mappings between IP addresses and host names in your network
 
+Git: A free open source version control system available for installation on Unix based platforms, Windows and macOS
 
+Git directory: A database for a Git project that stores the changes and the change history
 
+Git log: A log that displays commit messages
 
+Git staging area: A file maintained by Git that contains all the information about what files and changes are going to go into the next commit
 
+Modified files: A stage where changes have been made to a file, but the have not been stored or committed
 
+Patch: A command that can detect that there were changes made to the file and will do its best to apply the changes
 
+Repository: An organization system of files that contain separate software projects
 
+Source Control Management (SCM): A tool similar to VCS to store source code
 
+Stage files: A stage where the changes to files are ready to be committed
 
+Tracked: A file’s changes are recorded
 
+Untracked: A file’s changes are not recorded
 
+Version control systems (VCS): A tool to safely test code before releasing it, allow multiple people collaborate on the same coding projects together, and stores the history of that code and configuration
 
+Branch: A pointer to a particular commit, representing an independent line of development in a project
 
+Commit ID: An identifier next to the word commit in the log
 
+Fast-forward merge: A merge when all the commits in the checked out branch are also in the branch that's being merged
 
+Head: This points to the top of the branch that is being used
 
+Master: The default branch that Git creates for when a new repository initialized, commonly used to place the approved pieces of a project
 
+Merge conflict: This occurs when the changes are made on the same part of the same file, and Git won't know how to merge those changes
+
+Rollback: The act of reverting changes made to software to a previous state
+
+Three-way merge: A merge when the snapshots at the two branch tips with the most recent common ancestor, the commit before the divergence
 
 <!--  Check out the following links for more information:
 

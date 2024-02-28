@@ -1,0 +1,112 @@
+:root {
+  --body-bg: #123;
+  --nav-bg: rgb(69, 92, 115);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  min-height: 200dvh;
+  margin: 0;
+  font-size: 1.25rem;
+  background: var(--body-bg);
+  color: white;
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: 2rem;
+}
+
+nav {
+  height: 100svh;
+  position: sticky;
+  top: 0;
+  background-color: var(--nav-bg);
+}
+
+.nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  font-size: 2rem;
+  gap: 2rem; /*we do it with grid becasue it's more simple than select child add margin but not the first and last child  you can do it with flex but you need to add more line flex-direction so grid work perfectly */
+  padding-block: 2rem;
+}
+
+.nav__list a {
+  color: white;
+  text-decoration: none;
+}
+
+/* ! there is where the heavy lifting is happing */
+
+/* Demo things */
+.nav__list li {
+  /* background-color: pink; */
+  padding: 0.5rem 2rem;
+  margin-inline-start: 1rem;
+  border-radius: 100vw 0 0 100vw;
+  /* if we do 100% is gonna do wierd really ugly oval 
+ but the fun thing with just using just large number that arent' percentages is we get a  perfect pill shape 
+ 
+ */
+}
+
+.nav__list li.active {
+  /* view transition name will give us little  slading on element it self  there issue with it right now that we'll see but it's sliding around   */
+  view-transition-name: hello;
+
+  /*  */
+  position: relative;
+  background-color: var(--body-bg);
+}
+
+/* here : above we get the cross fade and then by doing  a view transition name on individual element we're adding sorta  new thing (little sliding behavior)  */
+
+::view-transition-group(hello) {
+  /* ? The group here is "hello"  and the reason it's group  is this is like new pseudo element that we've got  with `view transitions` and we can choose the start and or the end of the animation. state or the group will be both of them and it based on the name between ()   */
+  animation-duration: 1.5s;
+  /*? when we do this we see the problem which is the transtion the name switching and cross fading over and this raise the one of the limitations of U transitions  which is ? when we wannt to name them every elemnt has to have its own   */
+}
+/* ! the more trickty bit si actually gonna come  from getting inverted border radius thigns tha t we want */
+
+.nav__list li.active::before,
+.nav__list li.active::after {
+  --border-radius: 1rem;
+  position: absolute;
+  background-color: var(--nav-bg);
+  content: "";
+  width: var(--border-radius);
+  height: var(--border-radius);
+  right: 0;
+  /* border-radius: 50%;  remove it from here and bring it down as individual  property of both of them becasue we don't want any of the corners to be circular except for on very specific */
+}
+/* here : this raises the first thing we sort of have think about  if we want this a little more adaptable  is how we can ensure that  these are always gonna be positioned in the right spot cuz the top 0 and bottom 0  doesn't work they actually need to be like  a negative version of their widht or height */
+
+.nav__list li.active::before {
+  /* this will move them out which is exactly where we wanna them to be   */
+  top: calc(var(--border-radius) * -1);
+
+  /* the border radius of the li element its self is outside of circle right now  and the real trick gonna do here is to fake that color that we want to hide this outside little part that's sticking  there */
+  box-shadow: 5px 5px 0 5px var(--body-bg);
+  border-radius: 0 0 100vw 0;
+
+  /* box shadow : zero offset on all directions[2]  zeroBlur , and 5px stroke which is how far out until  the blur is actually starting */
+}
+.nav__list li.active::after {
+  bottom: calc(var(--border-radius) * -1);
+  box-shadow: 5px -5px 0 5px var(--body-bg);
+  border-radius: 0 100vw 0 0;
+}
+
+.nav__list li > a {
+  position: relative;
+  z-index: 10;
+}
