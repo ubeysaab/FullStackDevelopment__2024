@@ -1,0 +1,72 @@
+
+// ! To avoid duplicating code in the classes below we creating a mixin 
+
+@mixin btn($bgColor : #ddd){
+  // if we don't give argument to the mixing the default we'll be #ddd
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  border: 0;
+  padding: $base-padding $base-padding * 2;
+  border-radius: $base-border-radius;
+  background-color: $bgColor;
+}
+// ! after creating the mixin we call it using @include inside the class we want
+
+//  generic button class that don't pass an argument so it gonna use the default values
+.btn{
+  @include btn;
+}
+
+@each $key,$val in $colors {
+  .btn-#{$key}{
+    //// text-decoration: none;
+    //// cursor: pointer;
+    //// display: inline-block;
+    //// border: 0;
+    //// padding: $base-padding $base-padding * 2;
+    //// border-radius: $base-border-radius;
+    //// background-color: $val;
+    //* instead of all line above 
+    @include btn($val);
+    &:hover{
+      background-color: lighten($color: $val, $amount: 10%);
+      
+    }
+  } 
+
+
+  .btn-outlined-#{$key}{
+    // the different between two classes is the border and back ground color
+    // text-decoration: none;
+    // cursor: pointer;
+    // display: inline-block;
+    // border: 0;
+    // padding: $base-padding $base-padding * 2;
+    // border-radius: $base-border-radius;
+    // background-color: #fff;
+    // * we remove background color because we can give it as parameter to the mixin
+    @include btn(white);
+    // !different
+    border: $base-border-thickness solid $val;
+
+    &:hover{
+      background-color: $val;
+      color: white;
+    }
+  }
+
+
+  // !  used for Functions  
+  .btn-comp-#{$key}{
+    @include btn($val);
+    color:light-comp($val);
+
+    &:hover{
+      background-color: light-comp($val);
+      color: $val;
+    }
+
+
+  }
+}

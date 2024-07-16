@@ -1,0 +1,28 @@
+
+// Every partials should be imported to index file because is the one that's ultimately being compile and bringing every thing together 
+
+
+
+// when we import partial file we don't have to add .scss extension the sass compiler is clever enough to figure that it self 
+
+// ! The order of imports in file does matter
+// 1. variables & functions : things gonna be usually over and over again
+@import "./variables";
+@import"./functions";
+
+//2. base &layout stuff :  reset styles , top level styles  , grid system 
+@import"./base";
+@import "./breakpoints";
+@import "./grid";
+
+//3. colors : to generate classes like for backgrounds or text colors they're gonna use variables and maybe functions 
+@import "./colors";
+
+// 4. Components : (button, card ,navbar,etc..)
+@import "./components/card";
+@import"./components/buttons";
+
+//5. Utilities : (margin,padding,border,opacity) classes
+@import "./utilities"
+// the order is showed above from 3to 5 might not matter so much  the main ones are 1 and 2 
+

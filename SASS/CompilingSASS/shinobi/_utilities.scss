@@ -1,0 +1,75 @@
+
+@use "sass:math";
+// we gonna create some thing like m-4 for pl 
+
+
+$utilities:(
+  // padding here is a inner map 
+  "padding":(
+    "prefix":"p",
+    "values":(
+      "0":0,
+      "1":$base-padding,
+      "2":$base-padding * 2,
+      "3":$base-padding * 3,
+      "4":$base-padding * 4,
+    )
+  ),
+  "border-radius":(
+    "prefix":"br",
+    "values":(
+      "default":$base-border-radius,
+      "nn":0,
+      "xs":math.div($base-border-radius,4),
+      "sm":math.div($base-border-radius,2),
+      "lg":$base-border-radius * 2,
+      "circle":50%
+    )
+  ),
+  "font-size":(
+    "prefix":"fs",
+    "values":(
+      'sm' : $font-size-s,
+      'md' : $base-font-size,
+      'lg' : $font-size-l,
+      'xl' : $font-size-xl,
+      'xxl' : $font-size-xxl,
+    )
+  ),
+  "display":(
+    "prefix":"display",
+    "values":(
+      "nn":none,
+      "bl":block,
+      "in-bl":inline-block,
+      "fl":flex,
+    )
+  ),
+);
+
+
+
+@each $property,$mapOfProperty in $utilities {
+  @debug $property;
+ 
+  $prefix :map-get( $mapOfProperty, $key:"prefix" );
+  $valuesInsideTheMapOfProperty : map-get( $mapOfProperty, $key:"values" );
+
+
+
+  @each $key,$value in $valuesInsideTheMapOfProperty{
+
+
+    @if($key == "default"){
+      .#{$prefix}{
+        #{$property} : $value;
+      }
+
+    }@else{
+
+      .#{$prefix}-#{$key}{
+        #{$property}: $value;
+      }
+    }
+  }
+}
