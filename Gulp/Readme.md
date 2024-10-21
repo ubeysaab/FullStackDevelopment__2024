@@ -44,6 +44,43 @@
 
 
 
+## Getting Started 
+
+  ### Top Level Functions 
+  - gulp.task - Define tasks
+  - gulp.src - Point to files to use
+  - gulp.dest - Points to folder to output
+  - gulp.watch - Watch files and folders for changes
+
+
+
+  
+
+
+
+## Some Gulp Plugins 
+1. gulp-sass: Converts SCSS (Sass) files into CSS. it need another package call sass.
+
+2. gulp-cssnano: Minifies CSS files to reduce file size.
+
+3. gulp-autoprefixer:Adds vendor prefixes(-webkit ,-moz) to CSS rules using values from "Can I Use".
+
+4. gulp-rename:Renames files in a stream (optional)
+
+5. gulp-babel:Transpiles ES6/ES7 JavaScript to ES5 using Babel toEnsures compatibility with older browsers that don't support newer JavaScript syntax.
+
+6. gulp-uglify:Minifies JavaScript files to reduce file size.
+
+7. gulp-imagemin:Optimizes images (JPEG, PNG, GIF, SVG) for web usage,Reduces file size without compromising quality
+
+8. gulp-sourcemaps:Generates source maps for debugging. Helps in mapping the minified code back to the original source code.
+
+9. browser-sync:Creates a development server that provides live reloading.Automatically reloads the browser when files change.
+
+10. gulp-clean:Deletes files and folders.Useful for cleaning up the build directory before generating new files.
+
+
+11. gulp-kit:Compiles .kit files into HTML, .kit files are similar to templates used for HTML components.
 
 
 
