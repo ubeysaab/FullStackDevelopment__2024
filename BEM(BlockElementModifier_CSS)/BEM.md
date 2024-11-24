@@ -1,34 +1,56 @@
-## Suggestions to organize your css
+# BEM (BLOCK,ELEMENT,MODIFIER) CSS Architecture
 
-https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/
-https://getbem.com/introduction/
+## General Suggestions for Organizing CSS
 
--- Follow your team 
+<!-- Follow your team 
+Use comments to create headers (dividers) labels 
+ Sort properties alphabetically  or in another way ABCSS
+Larger projects  follow a naming convention methodology (Block  Element Modifier : BEM ) -->
 
--- Use comments to create headers (dividers) labels 
 
--- Sort properties alphabetically  or in another way ABCSS
+- Follow Team Conventions: Stick to the naming and structuring standards agreed upon by your team.
+- Use Comments: Add comments as headers or dividers to group related styles.
+- Sort Properties: Choose a consistent property order, such as alphabetical sorting or grouping by functionality (e.g., ABCSS).
+- Larger Projects: Adopt a methodology like *BEM* to ensure your code remains manageable.
 
--- Larger projects  follow a naming convention methodology (Block  Element Modifier : BEM )
+
+
+
+
+
 
 
 <!-- html elements variables reset then classes   -->
 
+## BEM naming Convention Methodology 
+**Blocks**: (also known as components) contain the starting styles that we want so is the important semantic element in our Code.
 
-blocks as knows as  components : contain starting styles that we want (is the important semantic element)
+```html
+<div class="header">
+    <!-- The block represents a meaningful standalone element -->
+</div>
 
-but then we can modified them with each class that we apply 
+```
+
+> Blocks should be independent and reusable across the project, while allowing for modifications through the specific modifiers applied to them.
 
 
 
-Element : it is what inside the block and what depends upon the block __ (things designing a specific way just for the block . then they would become depnedent on that block ) "not standalone meaning - semantically tied to the block "
+**Element__:** it is what inside the block and what depends upon the block. **They are designed in a specific way just for the block and do not make sense outside it.** .
 
-__ two underscore doesn't  display(represent) the structure so you not gonna go like 
+ <!-- then they would become depnedent on that block ) "not standalone meaning - semantically tied to the block " -->
+
+__ two underscore doesn't  display(represent) the structure so we not gonna go like 
 ```html
 
 <button class="header__nav__btn"></button>
+
+<!-- that is not the case -->
+
 ```
-that is not the case you only want to start out  with the major component the block name . blockName__whatEverTheActualElementIs
+
+*Important Note:* Avoid chaining elements unnecessarily Instead, focus on the primary block and its direct elements  'blockName__whatEverTheActualElementIs'. 
+
 
 ```html
 
@@ -41,10 +63,7 @@ that is not the case you only want to start out  with the major component the bl
 
 
 
-Modifiers is about incremental style changes  on block 
-two dashes indicate that this is gonna be modifier 
-so we don't replace what we previously had (the class) we add this  in adiiton in our code 
-
+**Modifiers--:** are used to make incremental style changes to a block or element. Two dashes (--) indicate a modifier. Importantly modifiers do not replace the original class they are added alongside the existing class in our code to apply additional styles.
 
 
 <!-- usually button style using throughout our site not just in some sections  -->
@@ -53,3 +72,13 @@ so we don't replace what we previously had (the class) we add this  in adiiton i
 an element is gonna  have the two underscores 
 and the block is just gonna be the class defined  
 this all help on organization
+
+
+
+
+## Resources 
+[CSS Wizardy](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
+
+[Get BEM](https://getbem.com/introduction/)
+
+
