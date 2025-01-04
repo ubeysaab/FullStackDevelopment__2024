@@ -3,8 +3,8 @@
 // theme colors 
 $primary: #326dee !default;
 $secondary : #1ac886 !default;
-$error:#d32752 !default;
-$info:#f6c31c !default;
+$error: #d32752 !default;
+$info: #f6c31c !default;
 
 
 
@@ -40,23 +40,22 @@ $colors: (
 // ! The Reason of calling the variables below 'base' is so that we can manipulate these different values later on to give us some thing like a large padding or a large margin so we'd always reference the base value first of all , an that way in the future we can change all the different other values  by just changing the base value .
 
 // Spacing 
-$base-padding:0.75rem !default;
-$base-margin:0.75rem !default;
+$base-padding: 0.75rem !default;
+$base-margin: 0.75rem !default;
 
 // borders 
 $base-border-thickness: 1px !default;
-$base-border-radius:20px !default;
+$base-border-radius: 20px !default;
 
 
 
 // box shadow 
-$base-box-shadow: 1px 3px 5px rgba(0,0,0,0.1) !default;
+$base-box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1) !default;
 
 
 // font size 
-$base-font-size:1rem;
-$font-size-s:$base-font-size*0.75;
-$font-size-l:$base-font-size*1.5;
-$font-size-xl:$base-font-size*2;
-$font-size-xxl:$base-font-size*3;
-
+$base-font-size: 1rem;
+$font-size-s: $base-font-size*0.75;
+$font-size-l: $base-font-size*1.5;
+$font-size-xl: $base-font-size*2;
+$font-size-xxl: $base-font-size*3;

@@ -10,6 +10,8 @@ in this tutorial we're gonna build a mini CSS library similar to something like 
 - CSS
 - The basics of any programming language 
 
+
+*Syllabus*
 - [introduction](#introduction)
 - [Compiling SASS](#compiling-sass)
 - [Variables](#variables)
