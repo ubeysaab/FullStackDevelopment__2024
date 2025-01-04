@@ -15,6 +15,38 @@ $utilities:(
       "4":$base-padding * 4,
     )
   ),
+  "margin-left":(
+    "prefix":"ml",
+    "values":(
+      "0":0,
+      "1":$base-padding,
+      "2":$base-padding * 2,
+      "3":$base-padding * 3,
+      "4":$base-padding * 4,
+    )
+  ),
+  "margin-top":(
+    "prefix":"mt",
+    "values":(
+      "0":0,
+      "1":$base-padding,
+      "2":$base-padding * 2,
+      "3":$base-padding * 3,
+      "4":$base-padding * 4,
+      "5":$base-padding * 5,
+    )
+  ),
+  "margin-bottom":(
+    "prefix":"mb",
+    "values":(
+      "0":0,
+      "1":$base-padding,
+      "2":$base-padding * 2,
+      "3":$base-padding * 3,
+      "4":$base-padding * 4,
+      "5":$base-padding * 5,
+    )
+  ),
   "border-radius":(
     "prefix":"br",
     "values":(
@@ -45,6 +77,29 @@ $utilities:(
       "fl":flex,
     )
   ),
+  "justify-content": (
+    "prefix": "justify",
+    "values": (
+      "start": flex-start,
+      "end": flex-end,
+      "center": center,
+      "between": space-between,
+      "around": space-around,
+      "evenly": space-evenly,
+    )
+  ),
+  "gap":(
+    "prefix":"gap",
+    "values":(
+      "0":0,
+      "1":$base-padding,
+      "2":$base-padding * 2,
+      "3":$base-padding * 3,
+      "4":$base-padding * 4,
+      "5":$base-padding * 5,
+    )
+
+  )
 );
 
 

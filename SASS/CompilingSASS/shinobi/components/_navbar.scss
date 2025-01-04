@@ -1,0 +1,32 @@
+%flex-layout{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  // justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.navbar{
+  // 
+  @extend %flex-layout;
+padding: $base-padding * 2;
+box-shadow: $base-box-shadow;
+
+
+.site-title{
+  font-size: $font-size-l;
+}
+
+// ! we can change the properties of container when it is inside a navbar without change properties of container it self which is not gonna effect any container that sit outside the navbar
+.container {
+  @extend%flex-layout;
+}
+}
+
+
+@each $key,$val in $colors{
+  .navbar-#{$key}{
+    @extend .navbar;
+    background-color: $val;
+  }
+}
