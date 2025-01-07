@@ -16,21 +16,18 @@ in this tutorial we're gonna build a mini CSS library similar to something like 
 - [Compiling SASS](#compiling-sass)
 - [Variables](#variables)
   - [Variables types](#variables-types)
-  - [1. **Basic Variables**](#1-basic-variables)
-  - [2. **Maps**](#2-maps)
   - [Some Maps Methods](#some-maps-methods)
 - [Partials \& @import](#partials--import)
   - [SASS Partials and Import Order](#sass-partials-and-import-order)
-  - [Important Notes about `@import`](#important-notes-about-import)
+  - [Important Notes about `@import`(deprecated)](#important-notes-about-importdeprecated)
     - [The `@use` and `@forward` Rules in SASS](#the-use-and-forward-rules-in-sass)
-    - [**`@use`**:](#use)
-    - [**`@forward`**:](#forward)
-    - [Key Differences Between `@use` and `@forward`:](#key-differences-between-use-and-forward)
+      - [`@use`:](#use)
+      - [`@forward`:](#forward)
+      - [Key Differences Between `@use` and `@forward`:](#key-differences-between-use-and-forward)
 - [Nested Rules](#nested-rules)
 - [Using Math](#using-math)
 - [Debug SASS files](#debug-sass-files)
 - [Creating Utility Classes](#creating-utility-classes)
-- [Creating Utility Classes](#creating-utility-classes-1)
   - [Overview](#overview)
   - [Utility Class Structure](#utility-class-structure)
   - [Example of Utility Map Definition](#example-of-utility-map-definition)
@@ -56,6 +53,8 @@ in this tutorial we're gonna build a mini CSS library similar to something like 
 
 ## introduction 
 Browsers don't understand raw SASS files, so we can't just hook up a SASS file to our HTML pages like we would with a CSS file and expect it to work—it won't. We need to process SASS into CSS before it can work in a browser, and that's really easy to do. There are a ton of free tools available that can handle this for us. The way we will do it is by using a task runner called **Gulp**. To use it, we need Node.js installed on our computers because we'll be using the Node Package Manager to install **Gulp** and some plugins into our project.
+
+---
 
 ## Compiling SASS
 Everything we can do with CSS, we can also do in SCSS files, and then we can sprinkle in the extra SASS features when we need them.
@@ -83,7 +82,7 @@ However, the way we'll be doing it is by using **Gulp**, as we mentioned before.
 3. Prepare the gulpfile.js with the required configuration; **all necessary notes are included there**.
 
 
-
+---
 
 ## Variables 
 Variables are useful in CSS when we have values like theme colors, specific font sizes, or other frequently used properties in our website. Instead of rewriting those values repeatedly for different CSS selectors and rules, we can define them once as variables. Whenever we want to use those values, we simply reference the variables. If we need to change a value later, we only have to update it once where it's stored in the variable. This automatically updates every rule and selector that uses the variable, making code maintenance much easier.
@@ -93,16 +92,9 @@ Variables are useful in CSS when we have values like theme colors, specific font
 <!-- the way we create variable in SASS is `$variableName:value;` -->
 
 ### Variables types 
-In SASS we have two types of variables 
+Variables are used to store values such as colors, fonts, or any CSS value that you can reuse throughout your stylesheet. Here's a breakdown of variable types in SCSS, using your example:
 
-
-
-
-In SCSS (Sassy CSS), variables are used to store values such as colors, fonts, or any CSS value that you can reuse throughout your stylesheet. Here's a breakdown of variable types in SCSS, using your example:
-
----
-
-### 1. **Basic Variables**
+1. Basic Variables
 These are single-value variables that store a single piece of data, such as a color, size, or number,boolean.
 
 ```scss
@@ -110,7 +102,7 @@ $primary: #326dee; // A hexadecimal color value
 $error: #d32752;   // Another hexadecimal color value
 ```
 
-### 2. **Maps**
+2. Maps
 Maps in SCSS are similar to JavaScript objects. They are collections of `key:value` pairs, making them perfect for grouping related values.
 
 >Maps are really useful for generating utility classes whereby  loop through a map  and generate a class for each value in that map.
@@ -139,7 +131,7 @@ This function return the value associated with a given key from a map.
 ```
 
 
- 1. **`map-has-key($map, $key)`**
+ 2. **`map-has-key($map, $key)`**
 This function checks whether a given key exists in the map and returns a Boolean value (`true` or `false`).
 
 ```scss
@@ -168,7 +160,7 @@ This function merges two maps into one. If a key in `$map2` already exists in `$
 
 
 
-
+---
 
 ## Partials & @import 
 When we have a lot of code, our file can become very long and messy quickly. Instead, with SASS, we can use what's known as **partials**, which is a way to split our code into multiple files. For example, we can have a file for variables, a file for buttons, and a file for reset CSS. Then, we can bring all of those partial files together into a single root SASS file using `@import 'filename'`.
@@ -214,18 +206,23 @@ When we do this, the SASS compiler will ignore this file. Any file that starts w
 
 > The order of imports in a file **does matter** _because different files might depend on code declared in other files_. If a file depends on a value declared in another file, it must be *below* the file it depends on, because the SASS compiler, like normal CSS, works top to bottom.
 
---- 
+the order should be like this : 
+1. variables & functions : things gonna be usually  use over and over again.
+2. base &layout stuff :  reset styles , top level styles  , grid system, breakPoints
 
+3. colors : to generate classes like for backgrounds or text colors they're gonna use variables and maybe functions 
+4. Components : (button, card ,navbar,etc..)
+5. Utilities : (margin,padding,border,opacity) classes
 
+The order is showed above from 3 to 5 might not matter so much(because you may use utility classes in your components)  the main ones are 1 and 2. 
 
-### Important Notes about `@import`
-
+### Important Notes about `@import`(deprecated)
 
 #### The `@use` and `@forward` Rules in SASS
 
 The `@import` rule, which was previously used to bring in SASS files, has been **deprecated** in favor of `@use` and `@forward`.
 
-#### **`@use`**:
+##### `@use`:
 - **Purpose**: The `@use` rule loads a partial and makes its variables, mixins, and functions available with a namespace.
 - **Advantages**:
   - Avoids global namespace pollution, meaning you can keep your code clean and organized.
@@ -246,7 +243,7 @@ The `@import` rule, which was previously used to bring in SASS files, has been *
 
   In this example, instead of just importing and directly using `$primary-color`, we now reference it as `variables.$primary-color`, which avoids conflicts in the global namespace.
 
-#### **`@forward`**:
+##### `@forward`:
 - **Purpose**: The `@forward` rule is used to re-export styles from one partial to another. This allows you to bundle multiple files and only expose them as a package through one file.
 - **Advantages**:
   - It helps organize and expose parts of a codebase, especially in larger projects.
@@ -269,9 +266,9 @@ The `@import` rule, which was previously used to bring in SASS files, has been *
 
 ---
 
-#### Key Differences Between `@use` and `@forward`:
+##### Key Differences Between `@use` and `@forward`:
 
-Here’s a comparison of **`@use`** and **`@forward`** in table format:
+Here’s a comparison of `@use` and `@forward` in table format:
 
 | **Feature**                   | **`@use`**                                 | **`@forward`**                             |
 |-------------------------------|--------------------------------------------|--------------------------------------------|
@@ -344,10 +341,7 @@ The `math.div` function is similar to a function in a normal programming languag
 let's say we wanna perform some kind of calcualtions wich is bit complex  and we want to debug it, we wanna to see what the value is  of that calculation in the console  so we use `@debug  theOperation` to do that
 
 
-## Creating Utility Classes 
-Here’s the reorganized version of your code with proper structure and logical flow:
 
----
 
 ## Creating Utility Classes
 
@@ -911,19 +905,6 @@ $primary-color: #ff5733;
 
 
 ## Important Notes 
-**The order of imports in the main file does matter and should be :**
-1. Variables & Functions : things gonna be usually over and over again
-
-2. Base & Layout Stuff :  reset styles , top level styles  , grid system , media queries
-
-3. Colors : to generate classes like for backgrounds or text colors they're gonna use variables and maybe functions 
-
-4. Components : (button, card ,navbar,etc..)
-
-5. Utilities : (margin,padding,border,opacity) classes
-
-
-
 
 **We don't ever want to hard code stuff because then it makes updating  things later harder  so make every thing depend on variables**
 

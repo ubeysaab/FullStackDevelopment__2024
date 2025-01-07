@@ -1,3 +1,15 @@
+- [Modules](#modules)
+  - [Modules Types](#modules-types)
+    - [CommonJs Modules](#commonjs-modules)
+    - [EsModules](#esmodules)
+    - [Key Differences Between CommonJS and ES Modules](#key-differences-between-commonjs-and-es-modules)
+  - [Differences between `Dynamic` \& `compile-time` Loading.](#differences-between-dynamic--compile-time-loading)
+    - [Dynamic Loading](#dynamic-loading)
+    - [Compile-Time Loading](#compile-time-loading)
+    - [Key Differences](#key-differences)
+    - [Choosing Between the Two](#choosing-between-the-two)
+    - [Important Notes](#important-notes)
+  - [Resources](#resources)
 
 
 
@@ -5,28 +17,22 @@
 **Module** : is just a file that exports some code which allow developer to organize  code within their own projects or share code with the world through package manager like `npm` 
 
 
-
-
-
-
-
-
-
 ## Modules Types 
 In JavaScript there are two types of Modules : 
-1. **CommonJs Modules :** CommonJS is mainly used in server-side JS apps with Node, as browsers don't support the use of CommonJS.
+### CommonJs Modules
+CommonJS is mainly used in server-side JS apps with Node, as browsers don't support the use of CommonJS.
 
 
-  *In CommonJs*
-  - `module.exports` is the keyword we use to declare all we want to export from the file.
-  `module.exports = mod1Function`
-  <br/>
+*In CommonJs*
+- `module.exports` is the keyword we use to declare all we want to export from the file.
+`module.exports = mod1Function`
+<br/>
 
-  - If we wanted to export more than one thing from a single module, we can do it like this:
-  `module.exports = { mod1Function, mod1Function2 }`
-  <br/>
+- If we wanted to export more than one thing from a single module, we can do it like this:
+`module.exports = { mod1Function, mod1Function2 }`
+<br/>
 
-  - `require` is the keyword we use to import everything we want to use from the file that declares and exports it to us.
+- `require` is the keyword we use to import everything we want to use from the file that declares and exports it to us.
 
 
 > As a side comment, Node used to only support CommonJS to implement modules, but nowadays it also supports ESmodules which is a more modern approach. we can simply enable ESModule by <br/> 1.  changing the file extensions from .js to .mjs. <br/>2. adding a "type: module" field inside the package.json file With this statement we added, Node.js treats all files inside that package as ES modules, and we won’t have to change the file to a .mjs extension
@@ -39,17 +45,21 @@ module.exports = {moduleFunction,func2 : moduleFunction2}
 
 <br/>
 
-2. **EsModules :**  is a more modern approach that is currently supported by browser and server-side apps with Node.
+### EsModules 
+is a more modern approach that is currently supported by browser and server-side apps with Node.
 
-  *In ESModules*
+*In ESModules*
 
-  - instead of `require` we're using `import`.
+- instead of `require` we're using `import`.
+<br/>
+
+-  instead of `module.exports` we're using `export`.  `export { hello, why }` this called `Named Export` to import it we use `import {hello,why} from ./mod1ES.js`.
+<br/>
+
+- Another feature available in ESmodules is **import renaming** `import { hello as hf, why as wf } from './mod1ES.js'`  Notice we use the **"as"** keyword after each function, and then rename it however we want.
   <br/>
-  -  instead of `module.exports` we're using `export`.  `export { hello, why }` this called `Named Export` to import it we use `import {hello,why} from ./mod1ES.js`.
-  <br/>
-  - Another feature available in ESmodules is **import renaming** `import { hello as hf, why as wf } from './mod1ES.js'`  Notice we use the **"as"** keyword after each function, and then rename it however we want.
-    <br/>
-  - Another thing you could do is import all exports together and put them together in an object, like this:`import * as mod1 from './mod1.js' `
+
+- Another thing you could do is import all exports together and put them together in an object, like this:`import * as mod1 from './mod1.js' `
 
 > The last thing is `default` keyword when we use it we don't have to destructure the module we export when we import it. We can use it just like this:`import ready, { hello as hf, why as wf } from './mod1ES.js'`. We can even rename the import whatever we want without the **"as"** keyword, since JavaScript "knows" that if we're not destructuring we'll be referring to the `default` import.
 
@@ -58,7 +68,7 @@ module.exports = {moduleFunction,func2 : moduleFunction2}
 
 
 
-### Key Differences Between CommonJS and ESM
+### Key Differences Between CommonJS and ES Modules
 
 | Feature               | CommonJS                      | ES Modules (ESM)             |
 |-----------------------|-------------------------------|-------------------------------|
@@ -76,12 +86,12 @@ Dynamic loading and compile-time loading differ in **when and how** modules or r
 
 
 
-### **1. Dynamic Loading**
+###  Dynamic Loading
 
-#### **Definition:**
+ **Definition:**
 Dynamic loading refers to loading resources, such as modules, libraries, or files, at runtime (while the program is running).  
 
-#### **Key Characteristics:**
+ **Key Characteristics:**
 - **Timing:** Happens *after* the application has started.
 - **On-Demand:** Resources are loaded only when they are needed, reducing initial startup time.
 - **Flexibility:** Allows conditional imports or lazy loading based on user interaction or application state.
@@ -103,19 +113,19 @@ Dynamic loading refers to loading resources, such as modules, libraries, or file
     }
     ```
 
-#### **Use Cases:**
+ **Use Cases:**
 - Lazy-loading components or libraries in web applications.
 - Loading large libraries or assets only when needed.
 - Reducing initial bundle size in Single Page Applications (SPAs).
 
----
 
-### **2. Compile-Time Loading**
 
-#### **Definition:**
+###  Compile-Time Loading
+
+**Definition:**
 Compile-time loading refers to loading modules or resources during the build or compilation phase, before the application runs.  
 
-#### **Key Characteristics:**
+ **Key Characteristics:**
 - **Timing:** Happens *before* the application starts.
 - **Static Imports:** The application knows about the modules it needs in advance, leading to predictable behavior.
 - **Performance Impact:** Reduces runtime overhead since all modules are pre-loaded into the application.
@@ -132,14 +142,14 @@ Compile-time loading refers to loading modules or resources during the build or 
     doSomething();
     ```
 
-#### **Use Cases:**
+ **Use Cases:**
 - Core functionality that is always needed.
 - Modules that do not change based on runtime conditions.
 - Optimizing for environments where startup time is critical.
 
----
 
-### **Key Differences**
+
+### Key Differences
 
 | **Aspect**             | **Dynamic Loading**                | **Compile-Time Loading**          |
 |------------------------|------------------------------------|-----------------------------------|
@@ -150,9 +160,9 @@ Compile-time loading refers to loading modules or resources during the build or 
 | **Tree-Shaking**       | Not optimized for tree-shaking    | Optimized with modern bundlers   |
 | **Use Case**           | On-demand or lazy-loaded modules  | Always-needed modules            |
 
----
 
-### **Choosing Between the Two**
+
+### Choosing Between the Two
 - **Dynamic Loading** is ideal for applications where:
   - Certain features or modules are rarely used.
   - You want to improve initial load performance.
@@ -188,7 +198,7 @@ Compile-time loading refers to loading modules or resources during the build or 
 3. **The module can use other modules, script can not.**
 
 
-4. CORS : Access to script at 'file:///C:/Users/Uby/Desktop/JavaScript/modules/main.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, isolated-app, chrome-extension, chrome, https, chrome-untrusted. when we get this error the thing that we should do is serve this file on an HTTP server. By run `npx run serve`
+<!-- 4. CORS : Access to script at 'file:///C:/Users/Uby/Desktop/JavaScript/modules/main.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, isolated-app, chrome-extension, chrome, https, chrome-untrusted. when we get this error the thing that we should do is serve this file on an HTTP server. By run `npx run serve` -->
 
 
 
@@ -196,7 +206,7 @@ Compile-time loading refers to loading modules or resources during the build or 
 
 
 
-### Resources 
+## Resources 
 [Modules in JavaScript – CommonJS and ESmodules Explained](https://www.freecodecamp.org/news/modules-in-javascript/#bundlingmodules)
 
 [CommonJs vs.ESModules](https://blog.logrocket.com/commonjs-vs-es-modules-node-js/?ref=dailydev)
