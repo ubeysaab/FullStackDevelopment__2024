@@ -22,6 +22,7 @@ const cartSlice = createSlice({
       // the beauty of this ism in fact that we don't need to setup any thing manually as far as the action as far as the action creator we right away get in by default
       // and the only thing we wanna do is  pass in the clearcart function into whatever we getting back from dispatch 
       state.cartItems=[]
+      state.amount=0
     },
     removeItem : (state,action)=>{
         // console.log(action,state)

@@ -1,19 +1,23 @@
-import { Provider } from "react-redux";
-import { store } from "./store";
+import {  useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
 import CartContainer from "./components/CartContainer";
+import Modal from "./components/Modal";
+import { toggleModal } from "./features/Modal/modalSlice";
 
 
 function App() {
+  const {isOpen }= useSelector(store => store.modal)
   return (
-    <Provider store={store}>
-        <h1>
-          redux toolkit
-        </h1>
-        <Navbar/>
-        <CartContainer/>
 
-    </Provider>
+    <>
+    
+    <h1>
+      redux toolkit
+    </h1>
+    {isOpen&&<Modal/>}
+    <Navbar/>
+    <CartContainer/>
+    </>
   )
 }
 export default App;
