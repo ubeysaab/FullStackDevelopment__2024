@@ -3,14 +3,30 @@ import CartItem from './CartItem';
 import { useSelector ,useDispatch} from 'react-redux';
 import { calculateTheTotal, } from '../features/cart/cartSlice';
 import { toggleModal } from '../features/Modal/modalSlice';
+import { getCartItems } from '../features/cart/cartSlice';
 
 const CartContainer = () => {
   const dispatch = useDispatch()
-  const { cartItems, total, amount } = useSelector((state) => state.cart);
+  const { cartItems, total, amount,isLoading } = useSelector((state) => state.cart);
 
   useEffect(()=>{
     dispatch(calculateTheTotal())
+
   },[cartItems])
+
+
+
+  useEffect(()=>{
+    dispatch(getCartItems())
+
+  },[])
+  if (isLoading) {
+        return (
+          <div className='loading'>
+            <h1>Loading...</h1>
+          </div>
+        );
+      }
   if (amount < 1) {
     return (
       <section className='cart'>
@@ -22,6 +38,9 @@ const CartContainer = () => {
       </section>
     );
   }
+
+
+  
   return (
     <section className='cart'>
       {/* cart header */}

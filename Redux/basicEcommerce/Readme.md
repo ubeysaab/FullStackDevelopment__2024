@@ -1,3 +1,29 @@
+- [Redux Toolkit](#redux-toolkit)
+      - [React Course](#react-course)
+      - [Support](#support)
+      - [Docs](#docs)
+      - [Install Template](#install-template)
+      - [Existing App](#existing-app)
+      - [@reduxjs/toolkit](#reduxjstoolkit)
+      - [Extras](#extras)
+      - [react-redux](#react-redux)
+      - [Setup Store](#setup-store)
+      - [Setup Cart Slice](#setup-cart-slice)
+      - [Redux DevTools](#redux-devtools)
+      - [Access store value](#access-store-value)
+      - [Hero Icons](#hero-icons)
+      - [Setup Cart](#setup-cart)
+      - [First Reducer](#first-reducer)
+      - [Remove, Increase, Decrease](#remove-increase-decrease)
+      - [Modal](#modal)
+      - [modal slice](#modal-slice)
+      - [toggle modal](#toggle-modal)
+      - [async functionality with createAsyncThunk](#async-functionality-with-createasyncthunk)
+      - [Options](#options)
+      - [The extraReducers "builder callback" notation](#the-extrareducers-builder-callback-notation)
+
+
+
 # Redux Toolkit
 
 #### React Course
@@ -58,7 +84,7 @@ import { configureStore } from '@reduxjs/toolkit';
 export const store = configureStore({
   reducer: {},
 });
-```
+<!-- ```
 <!-- 
 #### Setup Provider
 
@@ -602,6 +628,8 @@ export default Modal;
 
 #### async functionality with createAsyncThunk
 
+
+
 - [Course API](https://course-api.com/)
 - https://course-api.com/react-useReducer-cart-project
 - cartSlice.js
@@ -726,4 +754,4 @@ const cartSlice = createSlice({
       });
   },
 });
-``` -->
+``` 

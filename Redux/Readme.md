@@ -9,6 +9,7 @@
     - [Selectors](#selectors)
     - [Slice](#slice)
   - [Redux Application Data Flow](#redux-application-data-flow)
+  - [CreatAsyncThunk](#creatasyncthunk)
 
 
 ## Redux Terms and Concepts
@@ -153,3 +154,7 @@ The UI re-renders based on the new state
 
 
  -->
+
+### CreatAsyncThunk
+A function that accepts a `Redux action type string` and a `callback function` that should `return a promise`.
+ It generates promise lifecycle action types based on the action type prefix that you pass in, and returns a thunk action creator that will run the promise callback and dispatch the [lifecycle actions](https://medium.com/@MakeComputerScienceGreatAgain/understanding-javascript-promises-e62a0ed1888f#:~:text=The%20Promise%20Lifecycle&text=Pending%3A%20The%20initial%20state%20of,fails%20and%20returns%20an%20error.) based on the returned promise.

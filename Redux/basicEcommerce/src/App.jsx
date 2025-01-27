@@ -2,12 +2,15 @@ import {  useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
 import CartContainer from "./components/CartContainer";
 import Modal from "./components/Modal";
-import { toggleModal } from "./features/Modal/modalSlice";
 
+import { getCartItems } from "./features/cart/cartSlice";
+import { useEffect } from "react";
 
 function App() {
   const {isOpen }= useSelector(store => store.modal)
-  return (
+
+
+return (
 
     <>
     
