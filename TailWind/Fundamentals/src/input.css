@@ -5,7 +5,7 @@
 /* 
 
 
-what tailwind does is it compiles the cssfrom this input.css file and it will create  it for us inside of the build directory where we tell it to. and what this does is it pulls in everything that tailwind defines. and then if ew want ot we can define our own CSS classes underneath this as well 
+what tailwind does is it compiles the cssfrom this input.css file and it will create  it for us inside of the build directory where we tell it to. and what this does is it pulls in everything that tailwind defines. and then if ew want to we can define our own CSS classes underneath this as well 
 
 for remove the problems that @tailwind gives we can go to setting unknown css lint ignore
 

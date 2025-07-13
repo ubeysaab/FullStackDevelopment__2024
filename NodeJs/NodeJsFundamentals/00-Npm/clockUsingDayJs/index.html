@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./generated.js"></script>
+  </head>
+  <body>
+
+
+
+
+
+
+
+
+    <section class="container">
+      <h3 class="container__userTimeZone"></h3>
+
+      <h1 class="container__time"></h1>
+  
+      <h3 class="container__date"> </h3>
+    </section>
+    <script>
+      let userTz = window.timeZone;
+
+      let userDt = window.userDate;
+
+      document.querySelector(".container__userTimeZone").innerHTML = userTz;
+      setInterval(() => {
+        let time = window.time();
+        console.log(time);
+        document.querySelector(".container__time").innerHTML = time;
+      }, 1000);
+      document.querySelector(".container__date").innerHTML = userDt;
+      
+    </script>
+    <script>
+      var MicroModal = require('micromodal'); // commonjs module
+
+    </script>
+   
+            
+  </body>
+</html>

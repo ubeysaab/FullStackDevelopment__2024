@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .modal {
+  display: none;
+}
+
+.modal.is-open {
+  display: block;
+}
+  </style>
+</head>
+<body>
+  
+<!-- [1] -->
+<div id="modal-1" aria-hidden="true">
+
+  <!-- [2] -->
+  <div tabindex="-1" data-micromodal-close>
+
+    <!-- [3] -->
+    <div role="dialog" aria-modal="true" aria-labelledby="modal-1-title" >
+
+
+      <header>
+        <h2 id="modal-1-title">
+          
+        </h2>
+
+        <!-- [4] -->
+        <button aria-label="Close modal" data-micromodal-close></button>
+      </header>
+
+      <div id="modal-1-content">
+        Modal Content
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<button data-micromodal-trigger="modal-1">hello</button>
+</body>
+<script>
+  console.log("h")
+  import MicroModal from 'micromodal';  // es6 module
+
+  console.log("hello")
+  MicroModal.init();
+
+</script>
+</html>

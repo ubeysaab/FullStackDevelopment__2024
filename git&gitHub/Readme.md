@@ -1,31 +1,26 @@
-- [Version Control](#1version-control)
-  - [Finding the differences](#finding-the-differences)
-  - [Generating Diff files](#generating-diff-files)
-  - [Applying changes](#applying-changes)
-  - [First steps with git](#first-steps-with-git)
-  - [Life cycle of each track file](#life-cycle-of-each-track-file)
-    <br>
-- [Advance Git interaction](#advance-git-interaction)
-
-  - [Skipping the stagin area](#skipping-the-stagin-area)
-  - [Getting more information about our changes](#getting-more-informations-about-our-changes)
+- [1.Version Control](#1version-control)
+  - [finding the differences](#finding-the-differences)
+  - [Generating diff files](#generating-diff-files)
+  - [applying changes](#applying-changes)
+  - [First Steps with Git](#first-steps-with-git)
+  - [life cycle of each track file](#life-cycle-of-each-track-file)
+- [2.Advance git interaction](#2advance-git-interaction)
+  - [Skipping the Stagin Area](#skipping-the-stagin-area)
+  - [Getting More Informations About Our Changes](#getting-more-informations-about-our-changes)
   - [Deleting and Renaming Files](#deleting-and-renaming-files)
   - [Undoing Changes Before Commiting](#undoing-changes-before-commiting)
   - [Amending Commits](#amending-commits)
-  - [RollBack](#rollbacks)
-    <br>
-
-- [Branching and Merging](#branching-and-merging)
+  - [Rollbacks](#rollbacks)
+    - [Identifiying a Commit](#identifiying-a-commit)
+- [Branching And Merging](#branching-and-merging)
   - [Working with Branches](#working-with-branches)
   - [Merging](#merging)
-  - [Merging Conflicts](#merge-conflicts)
-    <br/>
-- [Working With Remotes](#working-with-remotes)
-
+  - [Merge Conflicts](#merge-conflicts)
+- [Working with Remotes](#working-with-remotes)
   - [Fetching New Changes](#fetching-new-changes)
   - [Updating the Local Repository](#updating-the-local-repository)
-
 - [Terms and definitions](#terms-and-definitions)
+- [Todos](#todos)
 
 ## 1.Version Control
 

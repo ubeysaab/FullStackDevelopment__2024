@@ -1,0 +1,1 @@
+Nodemon: knows to reRun the code anytime we make changes and save it 

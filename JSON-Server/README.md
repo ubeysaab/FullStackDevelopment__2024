@@ -1,17 +1,18 @@
 
 
-- [What and why we need it](#what-is-json-server-and-why-we-need-it)
+- [What is Json Server and why we need it](#what-is-json-server-and-why-we-need-it)
 - [Get Request](#get-request)
 - [Filtering](#filtering)
 - [Sorting](#sorting)
 - [Pagination](#pagination)
-- [Operators ](#operators)
+- [Operators](#operators)
 - [Full Text Search](#full-text-search)
 - [RelationShips](#relationships)
 - [Post Request](#post-request)
 - [Put,Patch,Delete Requests](#putpatchdelete-requests)
-- [Configurations]()
-- [Generate Random Data ]()
+- [Configurations](#configurations)
+- [Generate Random Data](#generate-random-data)
+
 
 
 

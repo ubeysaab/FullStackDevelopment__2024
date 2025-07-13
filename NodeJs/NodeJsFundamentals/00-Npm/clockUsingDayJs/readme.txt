@@ -1,0 +1,1 @@
+in this project, I used NPM packages to do a basic digital clock  that shows the current time of the user to accomplish that I used Day.js package then by using the micromodal library I'll create a button on the page that should open modal and let the user select a time zone from dropdown to accomplish this and run my codes on web browser I also used the Browserify package

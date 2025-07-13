@@ -14,9 +14,9 @@ function buildStyles() {
   //   1. take in a source sass file 
   // 2. compile it to css file 
   //3. take out anycss rule we don't use
-  // . pipe it to some kind of destination folder 
+  // 4. pipe it to some kind of destination folder 
 
-  return src("./shinobi/**/*.scss").pipe(sass()).pipe(purgeCss({content:["./*.html"]})).pipe(dest('./css'))
+  return src("./shinobi/**/*.scss").pipe(sass()).pipe(purgeCss({ content: ["./*.html"] })).pipe(dest('./css'))
   //  ! doulbe astriks means any sub folders as well 
 }
 
